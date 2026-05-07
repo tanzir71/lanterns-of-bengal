@@ -195,6 +195,27 @@ body {
   color: var(--muted);
 }
 
+.footer {
+  margin-top: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.footer a {
+  color: var(--heading);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(236, 232, 224, 0.25);
+}
+
+.footer a:hover {
+  border-bottom-color: rgba(246, 195, 107, 0.5);
+}
+
 .game-section {
   border-top: 0;
   padding-top: 10px;
