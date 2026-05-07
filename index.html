@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#050815" />
+    <title>River Lantern Prototype</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="game-shell" aria-label="River Lantern 2D side-scroller prototype">
+      <div class="workspace">
+        <aside id="editor-panel" class="editor-panel" hidden>
+          <div class="editor-tabs" role="tablist" aria-label="Editor sections">
+            <button class="editor-tab is-active" data-editor-tab="assets" type="button" role="tab" aria-selected="true">Assets</button>
+            <button class="editor-tab" data-editor-tab="level" type="button" role="tab" aria-selected="false">Level</button>
+            <button class="editor-tab" data-editor-tab="sound" type="button" role="tab" aria-selected="false">Sound</button>
+            <button class="editor-tab" data-editor-tab="data" type="button" role="tab" aria-selected="false">Data</button>
+          </div>
+          <div class="editor-actions" aria-label="Editor actions">
+            <button id="save-level" type="button">Save</button>
+            <button id="load-level" type="button">Load</button>
+            <button id="reset-level" type="button">Reset</button>
+            <button id="export-level" type="button">Export</button>
+            <button id="import-level" type="button">Import</button>
+          </div>
+
+          <div class="editor-tab-panel is-active" data-editor-panel="assets" role="tabpanel">
+            <div class="panel-section">
+              <label>
+                Type
+                <select id="asset-type"></select>
+              </label>
+              <label>
+                Asset
+                <select id="asset-id"></select>
+              </label>
+              <div class="button-row">
+                <button id="add-asset" type="button">Add</button>
+                <button id="duplicate-asset" type="button">Duplicate</button>
+                <button id="delete-asset" type="button">Delete</button>
+                <button id="open-asset-modal" type="button">New Asset</button>
+                <button id="delete-asset-class" type="button">Delete Asset Class</button>
+              </div>
+            </div>
+
+            <div class="panel-section">
+              <label>
+                Source sheet
+                <select id="sprite-source"></select>
+              </label>
+              <div class="grid-fields">
+                <label>Crop X <input id="sprite-x" type="number" min="0" step="1" /></label>
+                <label>Crop Y <input id="sprite-y" type="number" min="0" step="1" /></label>
+                <label>Crop W <input id="sprite-w" type="number" min="1" step="1" /></label>
+                <label>Crop H <input id="sprite-h" type="number" min="1" step="1" /></label>
+                <label>Cut tolerance <input id="sprite-tolerance" type="number" min="0" max="80" step="1" /></label>
+              </div>
+              <label>
+                Upload sprite
+                <input id="sprite-upload" type="file" accept="image/*" />
+              </label>
+              <label>
+                Crop copy id
+                <input id="new-asset-id" type="text" placeholder="asset-copy" />
+              </label>
+              <canvas id="sprite-preview" width="180" height="120"></canvas>
+              <div class="button-row">
+                <button id="update-sprite" type="button">Update Sprite</button>
+                <button id="create-asset" type="button">Create Crop Copy</button>
+              </div>
+            </div>
+
+            <div class="panel-section grid-fields">
+              <label>X <input id="edit-x" type="number" step="1" /></label>
+              <label>Y <input id="edit-y" type="number" step="1" /></label>
+              <label>W <input id="edit-w" type="number" step="1" /></label>
+              <label>H <input id="edit-h" type="number" step="1" /></label>
+              <label>Alpha <input id="edit-alpha" type="number" min="0" max="1" step="0.05" /></label>
+              <label>Parallax <input id="edit-parallax" type="number" min="0" max="1" step="0.01" /></label>
+            </div>
+          </div>
+
+          <div class="editor-tab-panel" data-editor-panel="level" role="tabpanel" hidden>
+            <div class="panel-section">
+              <label>
+                Level
+                <select id="level-select"></select>
+              </label>
+              <label>
+                Level name
+                <input id="level-name" type="text" />
+              </label>
+              <div class="button-row">
+                <button id="new-level" type="button">New Level</button>
+                <button id="delete-level" type="button">Delete Level</button>
+              </div>
+              <label>
+                Camera
+                <input id="camera-slider" type="range" min="0" max="3240" value="0" />
+              </label>
+              <label>
+                Level width
+                <input id="level-width" type="number" min="1600" max="12000" step="100" />
+              </label>
+              <div class="grid-fields">
+                <label>Water X <input id="water-x" type="number" min="0" step="10" /></label>
+                <label>Water W <input id="water-w" type="number" min="260" step="10" /></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="editor-tab-panel" data-editor-panel="sound" role="tabpanel" hidden>
+            <div class="panel-section">
+              <div class="section-title">Sound</div>
+              <div id="sound-editor" class="sound-editor" aria-label="Sound editor"></div>
+            </div>
+          </div>
+
+          <div class="editor-tab-panel" data-editor-panel="data" role="tabpanel" hidden>
+            <div class="panel-section">
+              <textarea id="level-json" spellcheck="false" aria-label="Level JSON"></textarea>
+            </div>
+          </div>
+        </aside>
+        <div class="canvas-column">
+          <div class="topbar">
+            <button id="editor-toggle" type="button">Editor</button>
+            <span id="editor-status">Play mode</span>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="game" width="960" height="540"></canvas>
+            <div class="touch-controls" aria-label="Touch controls">
+              <button data-touch-key="ArrowLeft" type="button">Left</button>
+              <button data-touch-key="ArrowRight" type="button">Right</button>
+              <button data-touch-key="Space" type="button">Jump</button>
+              <button data-touch-key="KeyX" type="button">Lantern</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hint">Move: A/D or arrows | Jump: W/Space, double tap higher | Lantern: X/Enter | Board boat by stepping onto it</div>
+    </main>
+    <dialog id="asset-modal" class="asset-modal" aria-labelledby="asset-modal-title">
+      <div class="asset-modal-card">
+        <header class="asset-modal-header">
+          <h2 id="asset-modal-title">Create New Asset</h2>
+          <button id="close-asset-modal" type="button">Close</button>
+        </header>
+        <div class="asset-guide">
+          <h3>Upload Guide</h3>
+          <ul>
+            <li>Use PNG or WebP when possible, with a transparent background around the sprite.</li>
+            <li>Upload one complete object per file: one tree, one platform block, one collectible, one enemy, or one boat.</li>
+            <li>Avoid screenshots of full sprite sheets, UI labels, guide text, watermarks, shadows baked into a dark rectangle, or cropped-off edges.</li>
+            <li>Leave a small transparent margin around the silhouette so glow and antialiasing are not cut off.</li>
+            <li>For platforms, make the top edge clear and mostly flat; the game lets the hero stand on the rectangle you place.</li>
+            <li>For collectibles, keep the object centered and readable at small size, roughly 32 to 48 pixels tall after scaling.</li>
+            <li>For enemies and traversal assets, upload the whole side-view figure or boat in a single frame. This editor creates static assets; animation sheets need manual crop setup.</li>
+          </ul>
+        </div>
+        <div class="modal-fields">
+          <label>
+            Asset type
+            <select id="new-asset-type"></select>
+          </label>
+          <label>
+            Asset id or prefix
+            <input id="new-uploaded-asset-id" type="text" placeholder="river-tree" />
+          </label>
+          <label>
+            Sprite files
+            <input id="new-asset-files" type="file" accept="image/*" multiple />
+          </label>
+        </div>
+        <div class="button-row">
+          <button id="create-uploaded-assets" type="button">Create Uploaded Assets</button>
+        </div>
+      </div>
+    </dialog>
+    <script src="game.js"></script>
+  </body>
+</html>

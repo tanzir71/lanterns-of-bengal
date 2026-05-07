@@ -1,0 +1,440 @@
+@import url("https://fonts.googleapis.com/css2?family=Doto:wght@400;700&family=Intel+One+Mono:wght@400;700&display=swap");
+
+:root {
+  color-scheme: dark;
+  font-family: "Consolas", "Lucida Console", monospace;
+  background: #050815;
+  color: #f4ead3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  display: grid;
+  min-height: 100dvh;
+  place-items: center;
+  overflow: auto;
+  background: #050815;
+}
+
+.game-shell {
+  width: min(100%, 1280px);
+  margin-inline: auto;
+  padding: clamp(8px, 2vw, 14px);
+}
+
+.topbar {
+  height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+button,
+select,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+select,
+input {
+  min-height: 28px;
+  border: 1px solid rgba(146, 170, 167, 0.32);
+  background: #111927;
+  color: #f0e5c5;
+}
+
+button {
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #192338;
+}
+
+#editor-status {
+  color: rgba(238, 230, 205, 0.72);
+  font-size: 13px;
+}
+
+.workspace {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: start;
+  width: 100%;
+}
+
+.canvas-column {
+  width: min(100%, 960px, calc((100dvh - 78px) * 16 / 9));
+  max-width: 960px;
+  min-width: 0;
+  flex: 0 1 auto;
+}
+
+.canvas-wrap {
+  width: 100%;
+}
+
+.touch-controls {
+  display: none;
+}
+
+.editor-panel {
+  width: 286px;
+  max-height: calc(100vh - 88px);
+  overflow: auto;
+  padding: 10px;
+  border: 1px solid rgba(116, 151, 156, 0.28);
+  background: rgba(8, 14, 25, 0.94);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.42);
+}
+
+.editor-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.editor-tab {
+  min-width: 0;
+  padding: 0 6px;
+  color: rgba(238, 230, 205, 0.7);
+}
+
+.editor-tab.is-active {
+  border-color: rgba(245, 190, 97, 0.64);
+  background: #22304b;
+  color: #fff1cb;
+}
+
+.editor-tab-panel[hidden] {
+  display: none;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(146, 170, 167, 0.16);
+}
+
+.editor-actions button {
+  flex: 1 1 76px;
+  min-width: 64px;
+}
+
+.panel-section {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(146, 170, 167, 0.16);
+}
+
+.panel-section:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: 0;
+}
+
+.panel-section label {
+  display: grid;
+  gap: 4px;
+  color: rgba(238, 230, 205, 0.76);
+  font-size: 12px;
+}
+
+.section-title {
+  color: #f0e5c5;
+  font-size: 13px;
+}
+
+.asset-upload-box {
+  display: grid;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(146, 170, 167, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.panel-section select,
+.panel-section input,
+.panel-section textarea {
+  width: 100%;
+}
+
+.grid-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.button-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.asset-modal {
+  width: min(620px, calc(100vw - 28px));
+  max-height: min(760px, calc(100vh - 32px));
+  padding: 0;
+  border: 1px solid rgba(146, 170, 167, 0.28);
+  background: #08101d;
+  color: #f4ead3;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.68);
+}
+
+.asset-modal::backdrop {
+  background: rgba(2, 5, 10, 0.72);
+}
+
+.asset-modal-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+}
+
+.asset-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.asset-modal h2,
+.asset-modal h3 {
+  margin: 0;
+  color: #f0e5c5;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.asset-modal h3 {
+  font-size: 13px;
+}
+
+.asset-guide {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid rgba(146, 170, 167, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.asset-guide ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(238, 230, 205, 0.74);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.modal-fields {
+  display: grid;
+  gap: 9px;
+}
+
+.modal-fields label {
+  display: grid;
+  gap: 4px;
+  color: rgba(238, 230, 205, 0.78);
+  font-size: 12px;
+}
+
+.modal-fields select,
+.modal-fields input {
+  width: 100%;
+}
+
+#level-json {
+  width: 100%;
+  min-height: 126px;
+  resize: vertical;
+  border: 1px solid rgba(146, 170, 167, 0.28);
+  background: #090f1a;
+  color: #e7ddbf;
+}
+
+#sprite-preview {
+  width: 100%;
+  height: 120px;
+  border: 1px solid rgba(146, 170, 167, 0.28);
+  background:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.05) 25%, transparent 25%) 0 0 / 18px 18px,
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.05) 75%) 0 0 / 18px 18px,
+    #080d16;
+}
+
+.sound-editor {
+  display: grid;
+  gap: 10px;
+}
+
+.sound-row {
+  display: grid;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid rgba(146, 170, 167, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sound-control-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46px;
+  gap: 6px;
+  align-items: end;
+}
+
+.sound-value {
+  min-height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(146, 170, 167, 0.18);
+  background: rgba(0, 0, 0, 0.18);
+  color: rgba(238, 230, 205, 0.78);
+  font-size: 11px;
+}
+
+.sound-row header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  color: #f0e5c5;
+  font-size: 12px;
+}
+
+.sound-file-name {
+  overflow: hidden;
+  color: rgba(238, 230, 205, 0.56);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#game {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto;
+  border: 1px solid rgba(116, 151, 156, 0.26);
+  background: #07101e;
+  image-rendering: auto;
+  box-shadow: 0 24px 90px rgba(0, 0, 0, 0.62);
+  touch-action: none;
+}
+
+.hint {
+  height: 28px;
+  display: grid;
+  place-items: center;
+  color: rgba(238, 230, 205, 0.72);
+  font-size: 13px;
+  line-height: 1.25;
+  text-align: center;
+  white-space: normal;
+}
+
+@media (max-width: 860px) {
+  .workspace {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .canvas-column {
+    width: min(100%, calc((100dvh - 118px) * 16 / 9));
+    max-width: 100%;
+    order: 1;
+  }
+
+  .editor-panel {
+    order: 2;
+    width: 100%;
+    max-height: none;
+  }
+
+  .hint {
+    min-height: 34px;
+    height: auto;
+    padding: 4px 2px;
+    font-size: 12px;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .canvas-wrap {
+    display: grid;
+    gap: 8px;
+  }
+
+  .touch-controls {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+  }
+
+  .touch-controls button {
+    min-height: 42px;
+    padding: 0 6px;
+    border-color: rgba(245, 190, 97, 0.48);
+    background: rgba(17, 25, 39, 0.92);
+    color: #fff1cb;
+    user-select: none;
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 560px) {
+  .game-shell {
+    padding: 6px;
+  }
+
+  .topbar {
+    height: auto;
+    min-height: 32px;
+    flex-wrap: wrap;
+  }
+
+  .editor-panel {
+    padding: 8px;
+  }
+
+  .editor-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .button-row,
+  .editor-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .button-row button,
+  .editor-actions button {
+    min-width: 0;
+  }
+
+  .touch-controls button {
+    min-height: 38px;
+    font-size: 12px;
+  }
+}
