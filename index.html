@@ -4,15 +4,32 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#050815" />
-    <title>River Lantern Prototype</title>
+    <meta name="description" content="Lanterns of Bengal — a quiet night in rural Bangladesh, built as a playable prototype and landing page." />
+    <title>Lanterns of Bengal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="game-shell" aria-label="River Lantern 2D side-scroller prototype">
-      <div class="workspace">
-        <aside id="editor-panel" class="editor-panel" hidden>
+    <div class="page">
+      <header class="hero">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <p class="mono overline">Playable prototype · Single-page experience</p>
+        <h1>Lanterns of Bengal</h1>
+        <p class="tagline">Carry a small light through a very old night.</p>
+        <p class="lede">
+          An atmospheric micro-game set in rural Bangladesh nightlife—lanterns, river air, ghost stories, and the
+          soft hum of nature.
+        </p>
+        <div class="hero-meta mono">
+          Dhaka-born youth and Western players invited into the same night, without a lecture.
+        </div>
+      </header>
+
+      <section class="section game-section" aria-label="Playable prototype">
+        <div class="game-shell" aria-label="Lanterns of Bengal 2D prototype">
+          <div class="workspace">
+            <aside id="editor-panel" class="editor-panel" hidden>
           <div class="editor-tabs" role="tablist" aria-label="Editor sections">
             <button class="editor-tab is-active" data-editor-tab="assets" type="button" role="tab" aria-selected="true">Assets</button>
             <button class="editor-tab" data-editor-tab="level" type="button" role="tab" aria-selected="false">Level</button>
@@ -125,24 +142,179 @@
             </div>
           </div>
         </aside>
-        <div class="canvas-column">
-          <div class="topbar">
-            <button id="editor-toggle" type="button">Editor</button>
-            <span id="editor-status">Play mode</span>
-          </div>
-          <div class="canvas-wrap">
-            <canvas id="game" width="960" height="540"></canvas>
-            <div class="touch-controls" aria-label="Touch controls">
-              <button data-touch-key="ArrowLeft" type="button">Left</button>
-              <button data-touch-key="ArrowRight" type="button">Right</button>
-              <button data-touch-key="Space" type="button">Jump</button>
-              <button data-touch-key="KeyX" type="button">Lantern</button>
+            <div class="canvas-column">
+              <div class="topbar">
+                <button id="editor-toggle" type="button">Editor</button>
+                <span id="editor-status">Play mode</span>
+              </div>
+              <div class="canvas-wrap">
+                <canvas id="game" width="960" height="540"></canvas>
+                <div class="touch-controls" aria-label="Touch controls">
+                  <button data-touch-key="ArrowLeft" type="button">Left</button>
+                  <button data-touch-key="ArrowRight" type="button">Right</button>
+                  <button data-touch-key="Space" type="button">Jump</button>
+                  <button data-touch-key="KeyX" type="button">Lantern</button>
+                </div>
+              </div>
             </div>
           </div>
+          <div class="hint">Move: A/D or arrows · Jump: W/Space, double tap higher · Lantern: X/Enter · Board boat by stepping onto it</div>
         </div>
-      </div>
-      <div class="hint">Move: A/D or arrows | Jump: W/Space, double tap higher | Lantern: X/Enter | Board boat by stepping onto it</div>
-    </main>
+      </section>
+
+      <section class="section">
+        <h2>About the Game</h2>
+        <p>
+          Lanterns of Bengal is a slow, luminous walk through village nights—lanterns glowing like punctuation in the
+          dark, whispered folklore at the edge of a tea stall, boat rides that feel endless, and the ambient chorus of
+          insects and water.
+        </p>
+        <p>
+          It is less about winning and more about remembering: the way light moves, the way the river listens back, the
+          way fear and comfort sit in the same frame.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Inspiration &amp; Vision</h2>
+        <p>
+          This project brings lived experience into a format that can travel. Village nights, river life, and folklore
+          are not just aesthetics here—they are the emotional map.
+        </p>
+        <p>
+          I wanted Dhaka-born youth to recognize the texture of the night, and Western players to step into it without a
+          museum voice. The goal is intimacy, not translation.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>How This Was Built (Tools &amp; AI)</h2>
+        <p>
+          I approached this like a designer first: mood, structure, intention. I did not start with code—I started with
+          the feeling of a lantern moving through a landscape that listens back.
+        </p>
+        <p>
+          Sprites were generated with Gemini, then “vibe-coded” into the game using Codex, iterating until the tone felt
+          right.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Why This Is an MVP</h2>
+        <p>
+          Current AI-assisted game building and sprite generation are still in their infancy. Auto-generated assets
+          often need heavy human curation and iteration—cleanup, style alignment, pacing fixes, and the subtle work that
+          makes a world feel authored.
+        </p>
+        <p>
+          This project is intentionally an early prototype, documenting the process more than final polish.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>What’s Next</h2>
+        <ul class="list">
+          <li>
+            Explore an isometric, open-world direction that can hold a fuller range of lived experience in South Asia—a
+            “GTA meets The Sims” mood, grounded in daily life rather than spectacle.
+          </li>
+          <li>Prototype deeper vehicles: operating boats, rickshaws, buses, and motorcycles with tactile controls.</li>
+          <li>Expand into a life-sim layer: routines, relationships, small economies, and local spaces that feel real.</li>
+          <li>Document the codebase properly so this prototype can be repurposed, forked, and improved.</li>
+        </ul>
+        <p class="subtle">
+          Realistically, that larger vision will require significant AI advances to become achievable at indie scale—more
+          reliable asset generation, better world-building tooling, and stronger consistency over time.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2>Code &amp; Technical Notes</h2>
+        <p class="subtle">
+          This prototype is intentionally straightforward: one canvas game loop, a lightweight in-browser editor, and
+          local persistence. The goal is something you can read, remix, and evolve.
+        </p>
+
+        <details class="details">
+          <summary class="mono">Project structure</summary>
+          <ul class="list">
+            <li><span class="mono">index.html</span> — landing page + canvas container + editor UI.</li>
+            <li><span class="mono">style.css</span> — page + editor styling (dark UI, minimal chrome).</li>
+            <li><span class="mono">game.js</span> — game loop, rendering, input, editor, audio, persistence.</li>
+            <li><span class="mono">assets/</span> — sprite sheets and audio files used by the prototype.</li>
+          </ul>
+        </details>
+
+        <details class="details">
+          <summary class="mono">The core loop (how the game runs)</summary>
+          <p>
+            The game uses <span class="mono">requestAnimationFrame</span>. Each frame runs:
+            <span class="mono">update(dt)</span> → <span class="mono">updateAudioState()</span> → <span class="mono">draw(t)</span>.
+          </p>
+          <pre class="code"><code>function loop(now) {
+  const dt = Math.min(0.033, (now - lastTime) / 1000 || 0.016);
+  update(dt, now / 1000);
+  updateAudioState();
+  draw(now / 1000);
+  requestAnimationFrame(loop);
+}</code></pre>
+          <p class="subtle">
+            The update step handles movement, boats, collisions, ghosts, collectibles, and camera. The draw step layers
+            background, world, entities, and HUD in a consistent order.
+          </p>
+        </details>
+
+        <details class="details">
+          <summary class="mono">Levels, persistence, and the built-in editor</summary>
+          <ul class="list">
+            <li>
+              Levels are editable and can be exported/imported as JSON. Progression cycles through named levels (e.g.,
+              “Level 1”, “Level 2”).
+            </li>
+            <li>
+              Levels and editor state are saved locally (localStorage), so your tweaks persist between refreshes
+              (<span class="mono">river-lantern-levels-v2</span>, <span class="mono">river-lantern-level-v1</span>).
+            </li>
+            <li>
+              Custom sprites are stored in the browser (IndexedDB), so you can replace props without a build step.
+            </li>
+            <li>
+              Audio replacements are also stored locally (IndexedDB), so a “soundscape pass” can happen inside the
+              prototype without rebuilding.
+            </li>
+            <li>
+              The editor can adjust assets, platforms, props, water bounds, and audio settings, then save them locally.
+            </li>
+          </ul>
+          <p class="subtle">
+            This is designed for rapid iteration: you can treat the game like a living mood-board, then harden it later.
+          </p>
+        </details>
+
+        <details class="details">
+          <summary class="mono">How to repurpose or improve this prototype</summary>
+          <ul class="list">
+            <li>
+              Re-skin the world by swapping the sprite sheets referenced in <span class="mono">imagePaths</span> inside
+              <span class="mono">game.js</span>.
+            </li>
+            <li>
+              Turn it into a reusable engine by splitting <span class="mono">game.js</span> into modules (input,
+              renderer, physics, audio, editor, persistence) and adding a small data schema for levels.
+            </li>
+            <li>
+              Improve “feel” by tuning just a few constants: gravity, run speed, jump strength, boat steering, and
+              ghost spawn cadence.
+            </li>
+            <li>
+              Add scalability by introducing a fixed-timestep update, texture atlases, and a lightweight build pipeline
+              once iteration stabilizes.
+            </li>
+          </ul>
+        </details>
+      </section>
+
+    </div>
     <dialog id="asset-modal" class="asset-modal" aria-labelledby="asset-modal-title">
       <div class="asset-modal-card">
         <header class="asset-modal-header">
