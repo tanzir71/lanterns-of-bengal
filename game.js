@@ -108,9 +108,9 @@ const SOUND_DB_NAME = "river-lantern-audio";
 const SOUND_DB_STORE = "files";
 const ASSET_DB_NAME = "river-lantern-assets";
 const ASSET_DB_STORE = "sprites";
-const LEVEL_DEFAULTS_VERSION_KEY = "river-lantern-level-defaults-v14";
-const LEVEL_DEFAULTS_VERSION = "14";
-const REMOVED_BUILT_IN_ASSETS = new Set(["stoneBlock", "crateBlock", "mossPlatform", "rickshaw", "tinHouse", "bridge", "lanternItem", "cashBundle", "coinPile", "coinNote"]);
+const LEVEL_DEFAULTS_VERSION_KEY = "river-lantern-level-defaults-v15";
+const LEVEL_DEFAULTS_VERSION = "15";
+const REMOVED_BUILT_IN_ASSETS = new Set(["stoneBlock", "crateBlock", "mossPlatform", "rickshaw", "tinHouse", "bridge", "lanternItem", "cashBundle", "coinPile", "coinNote", "thatchHouse"]);
 const DOUBLE_TAP_JUMP_WINDOW = 0.28;
 const LEVEL_CLEAR_DELAY = 1.35;
 const COLLECTIBLE_VARIANTS = [
@@ -331,7 +331,6 @@ let farBackgroundProps = [
   { id: "reeds", x: 1180, y: 304, w: 168, h: 92, p: 0.22, a: 0.34 },
   { id: "metalHouse", x: 1510, y: 292, w: 150, h: 98, p: 0.2, a: 0.42 },
   { id: "palmTall", x: 1810, y: 236, w: 116, h: 154, p: 0.16, a: 0.34 },
-  { id: "thatchHouse", x: 2100, y: 296, w: 132, h: 102, p: 0.2, a: 0.42 },
   { id: "bananaFruit", x: 2410, y: 254, w: 112, h: 142, p: 0.15, a: 0.36 },
   { id: "bambooA", x: 2760, y: 262, w: 96, h: 132, p: 0.18, a: 0.36 },
   { id: "mudHouse", x: 3100, y: 306, w: 128, h: 82, p: 0.2, a: 0.42 },
@@ -353,7 +352,6 @@ let worldProps = [
   { id: "metalHouse", x: 2960, y: 310, w: 184, h: 122, a: 0.88 },
   { id: "reeds", x: 3320, y: 328, w: 176, h: 104, a: 0.84 },
   { id: "bananaFruit", x: 3710, y: 286, w: 120, h: 150, a: 0.86 },
-  { id: "thatchHouse", x: 4080, y: 316, w: 150, h: 118, a: 0.86 },
   { id: "palmTall", x: 4470, y: 258, w: 136, h: 176, a: 0.86 },
   { id: "bambooA", x: 4860, y: 292, w: 100, h: 140, a: 0.84 },
   { id: "reeds", x: 5230, y: 328, w: 176, h: 104, a: 0.82 },
@@ -393,7 +391,6 @@ const defaultSizes = {
   reeds: { w: 176, h: 104 },
   mudHouse: { w: 174, h: 110 },
   metalHouse: { w: 190, h: 126 },
-  thatchHouse: { w: 150, h: 118 },
   auto: { w: 128, h: 98 },
   bus: { w: 172, h: 112 },
   coveredBoat: { w: 158, h: 58 },
@@ -449,7 +446,6 @@ defineAsset("bambooB", "village", crop.village.bambooB, ["foreground", "backgrou
 defineAsset("reeds", "village", crop.village.reeds, ["foreground", "background"], 12);
 defineAsset("mudHouse", "village", crop.village.mudHouse, ["foreground", "background"], 12);
 defineAsset("metalHouse", "village", crop.village.metalHouse, ["foreground", "background"], 12);
-defineAsset("thatchHouse", "transport", crop.transport.thatchHouse, ["foreground", "background"], 10);
 defineAsset("auto", "transport", crop.transport.auto, ["foreground"], 10);
 defineAsset("bus", "transport", crop.transport.bus, ["foreground"], 10);
 defineAsset("coveredBoat", "boat", crop.coveredBoat, ["foreground", "background"], 10);
@@ -2452,6 +2448,7 @@ function normalizeBoat(item = {}, index = 0) {
 }
 
 function normalizeProp(item = {}, fallbackId = "palmTall") {
+  if (REMOVED_BUILT_IN_ASSETS.has(item.id)) return null;
   const id = assetAvailable(item.id) ? item.id : fallbackId;
   if (!assetAvailable(id)) return null;
   const size = defaultSizes[id] || { w: 96, h: 96 };
@@ -2529,7 +2526,6 @@ function createBuiltInLevels() {
     { id: "reeds", x: 1650, y: 310, w: 174, h: 94, p: 0.2, a: 0.34 },
     { id: "metalHouse", x: 2200, y: 292, w: 156, h: 104, p: 0.19, a: 0.42 },
     { id: "bananaWide", x: 2760, y: 252, w: 138, h: 140, p: 0.15, a: 0.34 },
-    { id: "thatchHouse", x: 3320, y: 296, w: 142, h: 112, p: 0.2, a: 0.42 },
     { id: "bambooB", x: 3920, y: 264, w: 104, h: 138, p: 0.18, a: 0.36 },
   ];
   level2.foreground = [
@@ -2540,7 +2536,6 @@ function createBuiltInLevels() {
     { id: "bananaWide", x: 2050, y: 288, w: 140, h: 146, a: 0.84 },
     { id: "metalHouse", x: 2560, y: 310, w: 188, h: 124, a: 0.88 },
     { id: "reeds", x: 3090, y: 330, w: 180, h: 104, a: 0.84 },
-    { id: "thatchHouse", x: 3700, y: 316, w: 154, h: 118, a: 0.86 },
     { id: "bambooB", x: 4250, y: 296, w: 104, h: 138, a: 0.84 },
   ];
   level2.platforms = [
